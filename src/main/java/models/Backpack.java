@@ -20,8 +20,8 @@ public class Backpack {
 
     //Getters
     public float getTotalCost() {
-        for (Item good: packed) {
-            totalCost += good.getItemPrice() * good.getQuantity();
+        for (Item singleItem: packed) {
+            totalCost += singleItem.getItemPrice() * singleItem.getQuantity();
         }
         //round this later on
         return totalCost;

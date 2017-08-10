@@ -1,0 +1,24 @@
+
+{{#partial "content"}}
+
+    <h1>Items list!</h1>
+
+    {{#if items}}
+        {{#each items }}
+            <div class="col-md-4">
+                <form>
+                    <div class="radio">
+                        <label>
+                            <input type="checkbox" name="item-onlist" value="true"><a href="/travel/{{id}}">{{ itemName }}</a><br>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-success">Go!</button>
+                </form>
+            </div>
+        {{/each}}
+    {{else}}
+        <p>No locations to list!</p>
+    {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}

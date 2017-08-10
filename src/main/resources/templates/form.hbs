@@ -1,0 +1,27 @@
+{{#partial "content"}}
+
+            <h1>Add a new Item</h1>
+
+        <form action="/" method="post">
+            <label for="itemName">Name</label>
+            <input id="itemName" name="itemName" type="text">
+            <label for="itemPrice">Price</label>
+            <input id="itemPrice" name="itemPrice" type="text">
+            <label for="itemWeight">Weight</label>
+            <input id="itemWeight" name="itemWeight" type="text">
+            <label for="purchased">Item Purchased?</label>
+            <select class="form-control" id="purchased">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+            <label for="packed">Item Packed?</label>
+            <select class="form-control" id="packed">
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+
+        <button type="submit" class="btn btn-success">Go!</button>
+    </form>
+{{/partial}}
+
+{{> layout.hbs}}

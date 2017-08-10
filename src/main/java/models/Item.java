@@ -1,6 +1,9 @@
 package models;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Item {
     private String itemName;
     private double itemPrice;
@@ -8,12 +11,26 @@ public class Item {
     private boolean purchased = false;
     private boolean packed = false;
     private int quantity;
+    private static ArrayList<Item> allItems = new ArrayList<Item>();
+
 
     //Constructor
-    public Item(String itemName, double itemPrice, double itemWeight) {
+    public Item(String itemName, double itemPrice, double itemWeight, boolean itemPurchased, boolean itemPacked) {
         this.itemName = itemName;
         this.itemPrice = itemPrice;
         this.itemWeight = itemWeight;
+        this.purchased = itemPurchased;
+        this.packed = itemPacked;
+        allItems.add(this);
+    }
+
+    public static Item createNewItem(){
+        Item newItem = new Item("knife",2.50,.5,false,false);
+        return newItem;
+    }
+
+    public static void clearItemList(){
+        allItems.clear();
     }
 
     //Setters
@@ -29,6 +46,10 @@ public class Item {
     }
 
     //Getters
+    public static ArrayList<Item> getAllItems() {
+        return allItems;
+    }
+
     public String getItemName() {
         return itemName;
     }

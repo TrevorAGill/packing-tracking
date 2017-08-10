@@ -1,0 +1,12 @@
+{{#partial "content"}}
+    <p>Item: {{item.itemName}}</p>
+
+    <p>Price: {{item.itemPrice}}</p>
+
+    <p>Weight: {{item.itemWeight}}</p>
+
+    <p><a href="/item/{{item.id}}/edit"><button class="btn btn-info">Edit this post</button></a></p>
+    <p><a href="/item/{{item.id}}/delete"><button class="btn btn-info">Delete this post</button></a></p>
+{{/partial}}
+
+{{> layout.hbs}}

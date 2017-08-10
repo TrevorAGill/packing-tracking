@@ -2,6 +2,7 @@ package models;
 
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 
 public class Item {
@@ -12,6 +13,8 @@ public class Item {
     private boolean packed = false;
     private int quantity;
     private static ArrayList<Item> allItems = new ArrayList<Item>();
+    private int itemSize;
+    private int id;
 
 
     //Constructor
@@ -21,6 +24,8 @@ public class Item {
         this.itemWeight = itemWeight;
         this.purchased = itemPurchased;
         this.packed = itemPacked;
+        this.itemSize++;
+        this.id = itemSize;
         allItems.add(this);
     }
 
@@ -32,6 +37,38 @@ public class Item {
     public static void clearItemList(){
         allItems.clear();
     }
+
+    public static Item findById(int id){
+        for(Item item : allItems) {
+            if (item.id == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    public static void deleteItem(int id) {
+        try {
+            for (Item thisItem : allItems) {
+                if (thisItem.id == id)
+                    allItems.remove(thisItem);
+            }
+        }
+        catch (ConcurrentModificationException ex){
+            ex.printStackTrace();
+        }
+    }
+
+    public void editItem(String itemName, Double itemPrice, Double itemWeight, boolean purchased, boolean packed) {
+        this.itemName = itemName;
+        this.itemPrice = itemPrice;
+        this.itemWeight = itemWeight;
+        this.purchased = purchased;
+        this.packed = packed;
+
+    }
+
+
 
     //Setters
     public void setPacked() {
@@ -46,6 +83,11 @@ public class Item {
     }
 
     //Getters
+
+    public int getId() {
+        return id;
+    }
+
     public static ArrayList<Item> getAllItems() {
         return allItems;
     }

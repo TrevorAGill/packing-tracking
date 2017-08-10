@@ -2,20 +2,19 @@
 {{#partial "content"}}
 
     <h1>Items list!</h1>
-
-    {{#if items}}
-        {{#each items }}
-            <div class="col-md-4">
-                <form>
+    <div class="col-md-4">
+        <form>
+            {{#if items}}
+                {{#each items}}
                     <div class="radio">
                         <label>
-                            <input type="checkbox" name="item-onlist" value="true"><a href="/travel/{{id}}">{{ itemName }}</a><br>
+                        <input type="checkbox" name="item-onlist" value="true"><a href="/item/{{id}}">{{ itemName }}</a>
                         </label>
                     </div>
-                    <button type="submit" class="btn btn-success">Go!</button>
-                </form>
-            </div>
-        {{/each}}
+            {{/each}}
+        </form>
+        <button type="submit" class="btn btn-success">Go!</button>
+    </div>
     {{else}}
         <p>No locations to list!</p>
     {{/if}}

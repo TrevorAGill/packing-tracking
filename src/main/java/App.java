@@ -24,7 +24,14 @@ public class App {
             return new ModelAndView(model, "index.hbs");
         }, new HandlebarsTemplateEngine());
 
-        post("/", (req,res)->{
+        //show new post form
+        get("/item/new", (request, response) -> {
+            Map<String,Object> model = new HashMap<>();
+            return new ModelAndView(model, "form.hbs");
+        }, new HandlebarsTemplateEngine());
+
+        //add new post to index
+        post("/item/new", (req,res)->{
             Map<String, Object> model = new HashMap<>();
             String name = req.queryParams("itemName");
             Double price = Double.parseDouble(req.queryParams("itemPrice"));
@@ -37,10 +44,48 @@ public class App {
             return null;
         });
 
-        get("item/new", (request, response) -> {
-            Map<String,Object> model = new HashMap<>();
+        //this is just showing an individual item's detail
+        get("/item/:id", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Item foundItem = Item.findById(Integer.parseInt(req.params("id")));
+            model.put("item", foundItem);
+            return new ModelAndView(model, "item-detail.hbs");
+        }, new HandlebarsTemplateEngine());
+
+
+        //go to form to edit existing item
+        get("/item/:id/edit", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            Item foundItem = Item.findById(Integer.parseInt(req.params("id")));
+            model.put("editItem", foundItem);
             return new ModelAndView(model, "form.hbs");
         }, new HandlebarsTemplateEngine());
+
+        //post edited item
+        post("/item/:id/edit", (request, response) -> {
+            Map<String, Object> model = new HashMap<>();
+            String newName = request.queryParams("itemName");
+            Double newPrice = Double.parseDouble(request.queryParams("itemPrice"));
+            Double newWeight = Double.parseDouble(request.queryParams("itemWeight"));
+            boolean newPurchased = Boolean.parseBoolean(request.queryParams("purchased"));
+            boolean newPacked = Boolean.parseBoolean(request.queryParams("packed"));
+            Item editItem = Item.findById(Integer.parseInt(request.params("id")));
+            editItem.editItem(newName, newPrice, newWeight, newPurchased, newPacked);
+            model.put("item", editItem);
+            response.redirect("/");
+            return null;
+        });
+
+        //delete
+        get("/item/:id/delete", (request,response)-> {
+            int idOfPostToDelete = Integer.parseInt(request.params("id")); //pull id - must match route segment
+            Item.deleteItem(idOfPostToDelete);
+            response.redirect("/");
+            return null;
+        });
+
+
     }
+
 
 }

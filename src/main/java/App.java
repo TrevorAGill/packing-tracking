@@ -2,9 +2,8 @@ import models.Item;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.Array;
+import java.util.*;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -76,6 +75,8 @@ public class App {
             return null;
         });
 
+
+
         //delete
         get("/item/:id/delete", (request,response)-> {
             int idOfPostToDelete = Integer.parseInt(request.params("id")); //pull id - must match route segment
@@ -84,7 +85,11 @@ public class App {
             return null;
         });
 
-
+        post("/item/purchased", (request, response) -> {
+            String checkedvalues[] = request.queryParamsValues("item-onlist");
+            List<String>TestList = Arrays.asList(checkedvalues);
+            return null;
+        });
     }
 
 

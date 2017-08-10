@@ -3,7 +3,7 @@
 
     <h1>Items list!</h1>
     <div class="col-md-4">
-        <form>
+        <form action="/item/purchased" method="post">
             {{#if items}}
                 {{#each items}}
                     <div class="radio">
@@ -13,7 +13,7 @@
                     </div>
             {{/each}}
         </form>
-        <button type="submit" class="btn btn-success">Go!</button>
+        <button type="submit" class="btn btn-success">Mark as Purchased!</button>
     </div>
     {{else}}
         <p>No locations to list!</p>
